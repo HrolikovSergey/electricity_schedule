@@ -6,7 +6,6 @@ import {computed, ref} from "vue";
 import axios from "axios";
 import type {DaySchedule, DayScheduleApiResponse, Schedule, ScheduleApiResponse} from "@/Types";
 import ScheduleComponent from "@/Components/Schedule/Schedule.vue";
-import PersistentLink from "@/Components/PersistentLink.vue";
 
 const id = ref<string>('123178');
 const apiUrl = computed(() => {
