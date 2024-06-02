@@ -2,17 +2,28 @@
 
 import {FwbButton, FwbInput} from "flowbite-vue";
 
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import axios from "axios";
 import type {DaySchedule, DayScheduleApiResponse, Schedule, ScheduleApiResponse} from "@/Types";
 import ScheduleComponent from "@/Components/Schedule/Schedule.vue";
 
-const id = ref<string>('123178');
+const id = ref<string>('');
 const apiUrl = computed(() => {
   return import.meta.env.VITE_GET_SCHEDULE_URL + `?id=${id.value}`;
 });
+const currentScheduleUrl = computed(() => {
+  return import.meta.env.VITE_APP_URL + `${id.value}`;
+});
 const schedule = ref<Schedule | null>(null);
 const requestInProgress = ref<boolean>(false);
+
+onMounted(() => {
+  const path = window.location.pathname.split('/').pop();
+  if (path) {
+    id.value = path;
+    performSearch()
+  }
+});
 
 const performSearch = () => {
   requestInProgress.value = true;
@@ -54,16 +65,14 @@ const performSearch = () => {
         class="flex-grow"
         :disabled="requestInProgress"
     />
-    <FwbButton size="lg" class="ml-3" :disabled="id.length === 0 || requestInProgress" @click="performSearch">
+    <FwbButton size="lg" class="ml-2 flex items-center" :href="currentScheduleUrl" :disabled="id.length === 0 || requestInProgress">
       Search
     </FwbButton>
   </div>
-
   <ScheduleComponent
       class="mt-2 flex-grow flex-shrink basis-full"
       :request-in-progress="requestInProgress"
       :schedule="schedule"/>
-
 </template>
 
 <style scoped>

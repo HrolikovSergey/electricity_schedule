@@ -5,6 +5,7 @@ import type {DaySchedule} from "@/Types";
 defineProps<{
   daySchedule: DaySchedule,
 }>();
+
 </script>
 
 <template>

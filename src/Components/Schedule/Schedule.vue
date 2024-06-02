@@ -6,7 +6,7 @@ import ScheduleTitle from "@/Components/Schedule/ScheduleTitle.vue";
 import {FwbButton} from "flowbite-vue";
 import IconAngleRight from "@/Components/Icons/IconAngleRight.vue";
 import IconAngleLeft from "@/Components/Icons/IconAngleLeft.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import PersistentLink from "@/Components/PersistentLink.vue";
 
 const props = defineProps<{
@@ -14,7 +14,11 @@ const props = defineProps<{
   schedule?: Schedule | null,
 }>();
 
-const selectedDay = ref<number>(new Date().getDay() + 1);
+const selectedDay = ref<number>(new Date().getDay() || 7);
+
+const selected = computed(() => {
+  return props.schedule?.schedule.find(day => day.day === selectedDay.value);
+});
 
 const incDay = () => {
   selectedDay.value = selectedDay.value === 7 ? 1 : selectedDay.value + 1;
@@ -31,22 +35,21 @@ const decDay = () => {
     <Overlay v-if="requestInProgress"/>
     <div v-if="schedule" class="flex flex-col">
       <PersistentLink v-if="schedule" :id="schedule.id"/>
-      <h1 class="text-sm font-bold" v-html="schedule.address"></h1>
+      <h1 class="text-sm font-bold mt-2" v-html="schedule.address"></h1>
       <p class="text-sm mt-1" v-html="schedule.title"></p>
 
-      <div class="flex justify-between mt-2">
+      <div class="flex justify-between items-center mt-2">
         <FwbButton size="lg" @click="decDay">
           <IconAngleLeft class="w-6 h-6"/>
         </FwbButton>
-        <div class="font-semibold align-middle">Пн, 27.05</div>
+        <div class="font-semibold align-middle">{{ selected?.title }}</div>
         <FwbButton size="lg" @click="incDay">
           <IconAngleRight class="w-6 h-6"/>
         </FwbButton>
       </div>
       <div class="flex flex-nowrap mt-2">
         <ScheduleTitle/>
-        <DayScheduleComponent v-for="day of schedule.schedule" :key="day.day" v-show="selectedDay == day.day"
-                              :daySchedule="day"/>
+        <DayScheduleComponent v-if="selected" :daySchedule="selected"/>
       </div>
     </div>
   </div>
