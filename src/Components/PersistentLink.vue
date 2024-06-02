@@ -13,7 +13,7 @@ const siteUrl = computed(() => {
 
 <template>
   <div class="shrink-0 grow-0 bg-green-300 mt-2 p-2 rounded text-center">
-    Link to this schedule: <span>{{siteUrl}}{{ id }}</span>
+    Посилання на цей графік: <span>{{siteUrl}}{{ id }}</span>
   </div>
 </template>
 

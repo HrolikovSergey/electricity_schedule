@@ -61,12 +61,12 @@ const performSearch = () => {
     <FwbInput
         v-model="id"
         size="lg"
-        placeholder="Search ID"
+        placeholder="ID Абонента"
         class="flex-grow"
         :disabled="requestInProgress"
     />
     <FwbButton size="lg" class="ml-2 flex items-center" :href="currentScheduleUrl" :disabled="id.length === 0 || requestInProgress">
-      Search
+      Пошук
     </FwbButton>
   </div>
   <ScheduleComponent
