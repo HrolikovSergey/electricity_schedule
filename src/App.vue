@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {FwbButton, FwbInput} from "flowbite-vue";
+import {FwbButton, FwbInput, FwbTooltip} from "flowbite-vue";
 
 import {computed, onMounted, ref} from "vue";
 import axios from "axios";
@@ -64,8 +64,24 @@ const performSearch = () => {
         placeholder="ID Абонента"
         class="flex-grow"
         :disabled="requestInProgress"
-    />
-    <FwbButton size="lg" class="ml-2 flex items-center" :href="currentScheduleUrl" :disabled="id.length === 0 || requestInProgress">
+    >
+      <template #suffix>
+        <FwbTooltip>
+          <template #trigger>
+            <FwbButton pill>?</FwbButton>
+          </template>
+          <template #content>
+            <div class="p-2">
+              <p>Введіть ID абонента для пошуку розкладу</p>
+              <p>ID абонента можна подивитись за допомогою девелопер тулбару в списку запитів при пошуку графіку
+                відключень для вашої адресі на сайті КОЕК.</p>
+            </div>
+          </template>
+        </FwbTooltip>
+      </template>
+    </FwbInput>
+    <FwbButton size="lg" class="ml-2 flex items-center" :href="currentScheduleUrl"
+               :disabled="id.length === 0 || requestInProgress">
       Пошук
     </FwbButton>
   </div>
