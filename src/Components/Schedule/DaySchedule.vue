@@ -12,7 +12,7 @@ defineProps<{
   <div class="flex flex-col flex-grow">
     <div class="flex-grow-1">
       <div v-for="item of daySchedule.schedule"
-           class="p-1 w-full h-8 border-gray-100 border" :class="item ? 'bg-white' : 'bg-gray-500'"
+           class="dark:border-slate-600 p-1 w-full h-8 border-gray-100 border" :class="item ? 'bg-white dark:bg-slate-500' : 'bg-gray-500 dark:bg-slate-900'"
       ></div>
     </div>
   </div>

@@ -10,7 +10,7 @@ const hourNumberToText = (hour: number) => {
   <div class="flex flex-col flex-grow-0">
     <div class="flex-grow-1">
       <div v-for="n in 24"
-           class="text-center whitespace-nowrap p-1 h-8 bg-blue-700 border-gray-100 border text-white flex-grow-0 flex-shrink-0">
+           class="text-center whitespace-nowrap p-1 h-8 bg-blue-700 border-gray-100 border text-white flex-grow-0 flex-shrink-0 dark:border-slate-600 dark:bg-slate-800">
         {{ hourNumberToText(n) }}
       </div>
     </div>

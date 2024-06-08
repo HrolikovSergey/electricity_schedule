@@ -35,14 +35,14 @@ const decDay = () => {
     <Overlay v-if="requestInProgress"/>
     <div v-if="schedule" class="flex flex-col">
       <PersistentLink v-if="schedule" :id="schedule.id"/>
-      <h1 class="text-sm font-bold mt-2" v-html="schedule.address"></h1>
-      <p class="text-sm mt-1" v-html="schedule.title"></p>
+      <h1 class="text-sm font-bold mt-2 dark:text-white" v-html="schedule.address"></h1>
+      <p class="text-sm mt-1 dark:text-slate-400" v-html="schedule.title"></p>
 
       <div class="flex justify-between items-center mt-2">
         <FwbButton size="lg" @click="decDay">
           <IconAngleLeft class="w-6 h-6"/>
         </FwbButton>
-        <div class="font-semibold align-middle">{{ selected?.title }}</div>
+        <div class="font-semibold align-middle dark:text-white">{{ selected?.title }}</div>
         <FwbButton size="lg" @click="incDay">
           <IconAngleRight class="w-6 h-6"/>
         </FwbButton>
